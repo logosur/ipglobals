@@ -1,5 +1,9 @@
 controllers:
-    resource: ../../src/Controller/
+    resource: ../../src/Presentation/Controller/Api
+    type: annotation
+
+home:
+    resource: ../../src/Presentation/Controller
     type: annotation
 
 kernel:

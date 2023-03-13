@@ -1,3 +1,7 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+index:
+    path: /
+    controller: App\Presentation\Controller\WebController::index
+controllers:
+    resource: ../src/Presentation/Controller/Api/BlogController.php
+    type: annotation
+    prefix: /api
