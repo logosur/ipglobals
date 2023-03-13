@@ -13,10 +13,10 @@ class Geo
      */
     private float $lat;
 
-  	 /**
-  	  * Summary of lng
-  	  * @var float
-  	  */
+    /**
+     * Summary of lng
+     * @var float
+     */
     private float $lng;
 
     /**
@@ -39,39 +39,49 @@ class Geo
         return $this;
     }
 
-	/**
-	 * @return float
-	 */
-	public function getLat(): float
+
+    /**
+     * Summary of getLat
+     * @return float
+     */
+    public function getLat(): float
     {
-		return $this->lat;
-	}
-	
-	/**
-	 * @param float $lat 
-	 * @return self
-	 */
-	public function setLat(float $lat): self
+        return $this->lat;
+    }
+
+
+    /**
+     * Summary of setLat
+     * @param float $lat
+     * @return Geo
+     */
+    public function setLat(float $lat): self
     {
-		$this->lat = $lat;
-		return $this;
-	}
-	
-	/**
-	 * @return float
-	 */
-	public function getLng(): float
+        $this->lat = $lat;
+
+        return $this;
+    }
+
+
+    /**
+     * Summary of getLng
+     * @return float
+     */
+    public function getLng(): float
     {
-		return $this->lng;
-	}
-	
-	/**
-	 * @param float $lng 
-	 * @return self
-	 */
-	public function setLng(float $lng): self
+        return $this->lng;
+    }
+
+
+    /**
+     * Summary of setLng
+     * @param float $lng
+     * @return Geo
+     */
+    public function setLng(float $lng): self
     {
-		$this->lng = $lng;
-		return $this;
-	}
+        $this->lng = $lng;
+
+        return $this;
+    }
 }

@@ -2,8 +2,6 @@
 
 namespace App\Domain\Model;
 
-use App\Domain\Model\Geo;
-
 /**
  * Summary of Address
  */
@@ -11,7 +9,7 @@ class Address
 {
     /**
      * Summary of id
-     * @var int
+     * @var integer
      */
     private int $id;
 
@@ -48,8 +46,6 @@ class Address
 
     /**
      * Summary of fromArray
-     * @param array $data
-     * @return Address
      */
     public function fromArray(array $data): self
     {
@@ -62,93 +58,68 @@ class Address
         return $this;
     }
 
-	/**
-	 * @return int
-	 */
-	public function getId(): int
+
+    public function getId(): int
     {
-		return $this->id;
-	}
-	
-	/**
-	 * @param int $id 
-	 * @return self
-	 */
-	public function setId(int $id): self
+        return $this->id;
+    }
+
+
+    public function setId(int $id): self
     {
-		$this->id = $id;
-		return $this;
-	}
-	
-	/**
-	 * @return string
-	 */
-	public function getStreet(): string
+        $this->id = $id;
+        return $this;
+    }
+
+
+    public function getStreet(): string
     {
-		return $this->street;
-	}
-	
-	/**
-	 * @param string $street 
-	 * @return self
-	 */
-	public function setStreet(string $street): self
+        return $this->street;
+    }
+
+
+    public function setStreet(string $street): self
     {
-		$this->street = $street;
-		return $this;
-	}
-	
-	/**
-	 * @return string
-	 */
-	public function getCity(): string
+        $this->street = $street;
+        return $this;
+    }
+
+
+    public function getCity(): string
     {
-		return $this->city;
-	}
-	
-	/**
-	 * @param string $city 
-	 * @return self
-	 */
-	public function setCity(string $city): self
+        return $this->city;
+    }
+
+
+    public function setCity(string $city): self
     {
-		$this->city = $city;
-		return $this;
-	}
-	
-	/**
-	 * @return string
-	 */
-	public function getZipCode(): string
+        $this->city = $city;
+        return $this;
+    }
+
+
+    public function getZipCode(): string
     {
-		return $this->zipCode;
-	}
-	
-	/**
-	 * @param string $zipCode 
-	 * @return self
-	 */
-	public function setZipCode(string $zipCode): self
+        return $this->zipCode;
+    }
+
+
+    public function setZipCode(string $zipCode): self
     {
-		$this->zipCode = $zipCode;
-		return $this;
-	}
-	
-	/**
-	 * @return Geo
-	 */
-	public function getGeo(): Geo
+        $this->zipCode = $zipCode;
+        return $this;
+    }
+
+
+    public function getGeo(): Geo
     {
-		return $this->geo;
-	}
-	
-	/**
-	 * @param Geo $geo 
-	 * @return self
-	 */
-	public function setGeo(Geo $geo): self
+        return $this->geo;
+    }
+
+
+    public function setGeo(Geo $geo): self
     {
-		$this->geo = $geo;
-		return $this;
-	}
+        $this->geo = $geo;
+        return $this;
+    }
 }
