@@ -7,12 +7,12 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 /**
  * Summary of MockData
  */
-final class MockData implements MockDataInterface
+class MockData implements MockDataInterface
 {
     private const POST_URL = 'https://jsonplaceholder.typicode.com/posts';
 
     private const USER_URL = 'https://jsonplaceholder.typicode.com/users';
-    
+
     /**
      * @var array
      */
@@ -42,7 +42,6 @@ final class MockData implements MockDataInterface
             "body" => "ullam et saepe reiciendis voluptatem adipisci\nsit amet autem assumenda provident rerum culpa\nquis hic commodi nesciunt rem tenetur doloremque ipsam iure\nquis sunt voluptatem rerum illo velit",
         ],
     ];
-
 
     /**
      * @var array
@@ -125,14 +124,23 @@ final class MockData implements MockDataInterface
         ],
     ];
 
+    /**
+     * Summary of client
+     * @var HttpClientInterface
+     */
     private HttpClientInterface $client;
 
+    /**
+     * Summary of __construct
+     * @param HttpClientInterface $httpClient
+     */
     public function __construct(HttpClientInterface $httpClient)
     {
         $this->client = $httpClient;
     }
 
     /**
+     * Summary of getPosts
      * @return array
      */
     public function getPosts(): array
@@ -142,6 +150,7 @@ final class MockData implements MockDataInterface
     }
 
     /**
+     * Summary of getUsers
      * @return array
      */
     public function getUsers(): array
@@ -151,12 +160,14 @@ final class MockData implements MockDataInterface
     }
 
     /**
+     * Summary of getPost
      * @param int $id
+     * @throws \Exception
      * @return array
      */
     public function getPost(int $id): array
     {
-        if (!isset(self::POSTS[$id])) {
+        if (! isset(self::POSTS[$id])) {
             throw new \Exception('Post not found.');
         }
 
@@ -165,12 +176,14 @@ final class MockData implements MockDataInterface
     }
 
     /**
+     * Summary of getUser
      * @param int $id
+     * @throws \Exception
      * @return array
      */
     public function getUser(int $id): array
     {
-        if (!isset(self::USERS[$id])) {
+        if (! isset(self::USERS[$id])) {
             throw new \Exception('User not found.');
         }
 
@@ -195,6 +208,6 @@ final class MockData implements MockDataInterface
             ]
         );
 
-        return (array)$response->getContent();
+        return (array) $response->getContent();
     }
 }
