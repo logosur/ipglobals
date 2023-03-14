@@ -10,12 +10,19 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
  */
 class MockData implements MockDataInterface
 {
-    private const POST_URL = 'https://jsonplaceholder.typicode.com/posts';
+    //private const POST_URL = 'https://jsonplaceholder.typicode.com/posts';
 
-    private const USER_URL = 'https://jsonplaceholder.typicode.com/users';
+    //private const USER_URL = 'https://jsonplaceholder.typicode.com/users';
 
     /**
-     * @var array
+     * @var array{
+     *      array{
+     *          "userId": int,
+     *          "id": int,
+     *          "title": string,
+     *          "body": string
+     *      }
+     * }
      */
     private const POSTS = [
         1 => [
@@ -45,7 +52,29 @@ class MockData implements MockDataInterface
     ];
 
     /**
-     * @var array
+     * @var array{array{
+     *      "id": int,
+     *      "username": string,
+     *      "email": string,
+     *      "phone": string,
+     *      "website": string,
+     *      "address": array{
+     *          "id": int,
+     *          "street": string,
+     *          "city": string,
+     *          "zipcode": string,
+     *          "geo": array{
+     *              "lat": float,
+     *              "lng": float
+     *          }
+     *      },
+     *      "company": array{
+     *          "id": int,
+     *          "name": string,
+     *          "catchPhrase": string,
+     *          "bs": string,
+     *      }
+     * }}
      */
     private const USERS = [
         1 => [
@@ -60,8 +89,8 @@ class MockData implements MockDataInterface
                 "city" => "Gwenborough",
                 "zipcode" => "92998-3874",
                 "geo" => [
-                    "lat" => "-37.3159",
-                    "lng" => "81.1496",
+                    "lat" => -37.3159,
+                    "lng" => 81.1496,
                 ],
             ],
             "phone" => "1-770-736-8031 x56442",
@@ -85,8 +114,8 @@ class MockData implements MockDataInterface
                 "city" => "Wisokyburgh",
                 "zipcode" => "90566-7771",
                 "geo" => [
-                    "lat" => "-43.9509",
-                    "lng" => "-34.4618",
+                    "lat" => -43.9509,
+                    "lng" => -34.4618,
                 ],
             ],
             "phone" => "010-692-6593 x09125",
@@ -110,8 +139,8 @@ class MockData implements MockDataInterface
                 "city" => "McKenziehaven",
                 "zipcode" => "59590-4157",
                 "geo" => [
-                    "lat" => "-68.6102",
-                    "lng" => "-47.0653",
+                    "lat" => -68.6102,
+                    "lng" => -47.0653,
                 ],
             ],
             "phone" => "1-463-123-4447",
@@ -125,24 +154,19 @@ class MockData implements MockDataInterface
         ],
     ];
 
-    /**
-     * Summary of client
-     * @var HttpClientInterface
-     */
-    private HttpClientInterface $client;
+    //private HttpClientInterface $client;
 
     /**
      * Summary of __construct
-     * @param HttpClientInterface $httpClient
      */
-    public function __construct(HttpClientInterface $httpClient)
+    public function __construct()
     {
-        $this->client = $httpClient;
+        //$this->client = $httpClient;
     }
 
     /**
      * Summary of getPosts
-     * @return array
+     * @return self::POSTS
      */
     public function getPosts(): array
     {
@@ -152,7 +176,7 @@ class MockData implements MockDataInterface
 
     /**
      * Summary of getUsers
-     * @return array
+     * @return self::USERS
      */
     public function getUsers(): array
     {
@@ -164,7 +188,12 @@ class MockData implements MockDataInterface
      * Summary of getPost
      * @param int $id
      * @throws \Exception
-     * @return array
+     * @return array{
+     *          "userId": int,
+     *          "id": int,
+     *          "title": string,
+     *          "body": string
+     *      }
      */
     public function getPost(int $id): array
     {
@@ -180,7 +209,29 @@ class MockData implements MockDataInterface
      * Summary of getUser
      * @param int $id
      * @throws \Exception
-     * @return array
+     * @return array{
+     *      "id": int,
+     *      "username": string,
+     *      "email": string,
+     *      "phone": string,
+     *      "website": string,
+     *      "address": array{
+     *          "id": int,
+     *          "street": string,
+     *          "city": string,
+     *          "zipcode": string,
+     *          "geo": array{
+     *              "lat": float,
+     *              "lng": float
+     *          }
+     *      },
+     *      "company": array{
+     *          "id": int,
+     *          "name": string,
+     *          "catchPhrase": string,
+     *          "bs": string,
+     *      }
+     * }
      */
     public function getUser(int $id): array
     {
@@ -192,11 +243,7 @@ class MockData implements MockDataInterface
         //return $this->fetchPHApi(self::USER_URL . '/' . $id);
     }
 
-    /**
-     * Summary of fetchPHApi
-     * @param string $url
-     * @return array
-     */
+    /*
     private function fetchPHApi(string $url): array
     {
         $response = $this->client->request(
@@ -211,4 +258,5 @@ class MockData implements MockDataInterface
 
         return (array)json_decode($response->getContent());
     }
+    */
 }

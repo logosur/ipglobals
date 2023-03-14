@@ -17,11 +17,11 @@ $(document).ready(function () {
             var jsonData = data;
             $(jsonData).each(function(k, v) {
                 $('#post-detail #post-title label').text(v.title);
-                $('#post-detail #author p').text(
-                    'Author: ' + v.user.user_name
-                    + ' (' + v.user.address.city + ')'
-                    + ' - Email: ' + v.user.email + ''
-                    + ' - Company: ' + v.user.company.name + ''
+                $('#post-detail #author p').html(
+                    '<p>Author: ' + v.user.user_name + '</p>'
+                    + '<p> Location: ' + v.user.address.city + '</p>'
+                    + '<p> Email: ' + v.user.email + '</p>'
+                    + '<p> Company: ' + v.user.company.name + '</p>'
                     );
                 $('#post-detail #body p').text(v.body);
             });
@@ -66,8 +66,8 @@ $(document).ready(function () {
 });
 
 function buildPostItem(v) {
-    return '<div class="post-item">'
-        + '<h3 class="title">#' + v.id + ' ' + v.title + '</div>'
+    return '<div class="post-item mb-5">'
+        + '<h3 class="text-2xl mb-3">#' + v.id + ' ' + v.title + '</h3>'
         + '<p class="author"><label>Author: ' + v.user.user_name + ' (' + v.user.address.city + ')</label></p>'
         + '<div class="body"><p>' + v.body.substring(0, 50) + '...</p></div>'
         + '<div><a href="/viewPost/' + v.id + '">Read more</button></div>'

@@ -2,7 +2,7 @@
 namespace App\Tests\IntegrationTests\Service;
 
 use PHPUnit\Framework\TestCase;
-use App\Presentation\Service\RequestData;
+use App\Application\Service\RequestData;
 use App\Infrastructure\Service\MockDataInterface;
 use App\Domain\Dto\PostDto;
 use App\Domain\Model\User;

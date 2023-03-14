@@ -10,7 +10,7 @@ interface PersisterMockInterface
     /**
      * Summary of setUserId
      * @param int $userId
-     * @return PersisterMockInterface
+     * @return PersisterMock
      */
     public function setUserId(int $userId): self;
 

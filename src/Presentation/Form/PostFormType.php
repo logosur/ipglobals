@@ -23,7 +23,7 @@ class PostFormType extends AbstractType
                     ])],
                 'documentation' => [
                     'type' => 'string', // would have been automatically detected in this case
-                    'description' => 'Title',
+                    'description' => 'Title (min. 5)',
                 ],
             ])
             ->add('body', TextareaType::class, [
@@ -34,7 +34,7 @@ class PostFormType extends AbstractType
                     ])],
                 'documentation' => [
                     'type' => 'string', // would have been automatically detected in this case
-                    'description' => 'Body',
+                    'description' => 'Body (min. 3)',
                 ],
             ])
             ->add('Send', SubmitType::class, [

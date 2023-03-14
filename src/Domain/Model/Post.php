@@ -9,7 +9,11 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Post
 {
-    private int $id;
+    /**
+     * Summary of id
+     * @var int|null
+     */
+    private ?int $id;
 
     /**
      * @Assert\Type(type={"string"})
@@ -17,8 +21,8 @@ class Post
      * @Assert\Length(
      *      min = 5,
      *      max = 100,
-     *      minMessage = "FIELD_LENGTH_TOO_SHORT",
-     *      maxMessage = "FIELD_LENGTH_TOO_LONG"
+     *      minMessage = "This field is too short, min. 5",
+     *      maxMessage = "This field is too short, max. 100"
      * )
      * @var string
      */
@@ -30,8 +34,8 @@ class Post
      * @Assert\Length(
      *      min = 3,
      *      max = 2000,
-     *      minMessage = "FIELD_LENGTH_TOO_SHORT",
-     *      maxMessage = "FIELD_LENGTH_TOO_LONG"
+     *      minMessage = "This field is too short, min. 3",
+     *      maxMessage = "This field is too short, max. 2000"
      * )
      * @var string
      */
@@ -52,6 +56,13 @@ class Post
 
     /**
      * Summary of fromArray
+     * @param array{
+     *      "id": int,
+     *      "title": string,
+     *      "body": string,
+     *      "userId": ?int
+     * } $data
+     * @return Post
      */
     public function fromArray(array $data): self
     {
@@ -64,51 +75,81 @@ class Post
     }
 
 
+    /**
+     * Summary of getId
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
 
+    /**
+     * Summary of setId
+     * @param int|null $id
+     * @return Post
+     */
     public function setId(?int $id): self
     {
         $this->id = $id;
         return $this;
     }
 
-
+    /**
+     * Summary of getTitle
+     * @return string
+     */
     public function getTitle(): string
     {
         return $this->title;
     }
 
-
+    /**
+     * Summary of setTitle
+     * @param string $title
+     * @return Post
+     */
     public function setTitle(string $title): self
     {
         $this->title = $title;
         return $this;
     }
 
-
+    /**
+     * Summary of getBody
+     * @return string
+     */
     public function getBody(): string
     {
         return $this->body;
     }
 
-
+    /**
+     * Summary of setBody
+     * @param string $body
+     * @return Post
+     */
     public function setBody(string $body): self
     {
         $this->body = $body;
         return $this;
     }
 
-
+    /**
+     * Summary of getUserId
+     * @return int|null
+     */
     public function getUserId(): ?int
     {
         return $this->userId;
     }
 
-
+    /**
+     * Summary of setUserId
+     * @param int|null $userId
+     * @return Post
+     */
     public function setUserId(?int $userId): self
     {
         $this->userId = $userId;

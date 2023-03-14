@@ -25,7 +25,7 @@ class PersisterMock implements PersisterMockInterface
     /**
      * Summary of setUserId
      * @param int $userId
-     * @return PersisterMockInterface
+     * @return PersisterMock
      */
     public function setUserId(int $userId): self
     {
@@ -36,7 +36,7 @@ class PersisterMock implements PersisterMockInterface
 
     /**
      * Summary of persist
-     * @param mixed $model
+     * @param object $model
      * @return void
      */
     public function persist($model): void

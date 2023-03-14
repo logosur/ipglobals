@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Presentation\Service;
+namespace App\Application\Service;
 
 use App\Domain\Dto\PostDto;
 use App\Domain\Model\Post;

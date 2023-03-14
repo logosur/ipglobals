@@ -5,15 +5,13 @@ namespace App\Presentation\Controller\Api;
 use App\Domain\Model\Post;
 use App\Presentation\Form\PostFormType;
 use App\Infrastructure\Persistence\Service\PersisterMockInterface;
-use App\Presentation\Service\RequestDataInterface;
+use App\Application\Service\RequestDataInterface;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
-use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
 use OpenApi\Annotations as OA;
 use Nelmio\ApiDocBundle\Annotation\Model;
 
@@ -28,7 +26,7 @@ class BlogController extends AbstractFOSRestController
      *      @Model(type=PostDto::class)
      * )
      */
-    public function list(RequestDataInterface $requestData)
+    public function list(RequestDataInterface $requestData): View
     {
         $posts = $requestData->fetchPosts();
         $view = View::create();
@@ -47,7 +45,7 @@ class BlogController extends AbstractFOSRestController
      * )
      * @throws BadRequestHttpException
      */
-    public function fetchItem(int $id, RequestDataInterface $requestData)
+    public function fetchItem(int $id, RequestDataInterface $requestData): View
     {
         try {
             $post = $requestData->fetchPost($id);
@@ -70,7 +68,7 @@ class BlogController extends AbstractFOSRestController
      *      @Model(type=User::class)
      * )
      */
-    public function fetchUser(int $id, RequestDataInterface $requestData, Request $request)
+    public function fetchUser(int $id, RequestDataInterface $requestData, Request $request): View
     {
         try {
             $user = $requestData->fetchUser($id);
@@ -87,15 +85,20 @@ class BlogController extends AbstractFOSRestController
     /**
      * Post a new blog Post item.
      * @Rest\Post("/item", name="post_item")
-     * @OA\RequestBody(@Model(type=PostFormType::class))
+     * @OA\Post(
+     *      @OA\RequestBody(
+     *          @OA\Schema(type="array",
+     *          @OA\Property(
+     *              property="post_form", ref=@Model(type=PostFormType::class))
+     *          )
+     *      )
+     * )
      */
     public function postItem(
-        RequestDataInterface $requestData,
-        ValidatorInterface $validator,
-        FormFactoryInterface $formFactory,
         Request $request,
         PersisterMockInterface $persisterMock
-    ) {
+    ): View
+    {
         $post = new Post();
         $form = $this->createForm(PostFormType::class, $post);
         $form->handleRequest($request);

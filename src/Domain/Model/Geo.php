@@ -9,15 +9,15 @@ class Geo
 {
     /**
      * Summary of lat
-     * @var float
+     * @var string
      */
-    private float $lat;
+    private string $lat;
 
     /**
      * Summary of lng
-     * @var float
+     * @var string
      */
-    private float $lng;
+    private string $lng;
 
     /**
      * Summary of __construct
@@ -28,7 +28,7 @@ class Geo
 
     /**
      * Summary of fromArray
-     * @param array $data
+     * @param array{"lat": string, "lng": string} $data
      * @return Geo
      */
     public function fromArray(array $data): self
@@ -42,9 +42,9 @@ class Geo
 
     /**
      * Summary of getLat
-     * @return float
+     * @return string
      */
-    public function getLat(): float
+    public function getLat(): string
     {
         return $this->lat;
     }
@@ -52,10 +52,10 @@ class Geo
 
     /**
      * Summary of setLat
-     * @param float $lat
+     * @param string $lat
      * @return Geo
      */
-    public function setLat(float $lat): self
+    public function setLat(string $lat): self
     {
         $this->lat = $lat;
 
@@ -65,9 +65,9 @@ class Geo
 
     /**
      * Summary of getLng
-     * @return float
+     * @return string
      */
-    public function getLng(): float
+    public function getLng(): string
     {
         return $this->lng;
     }
@@ -75,10 +75,10 @@ class Geo
 
     /**
      * Summary of setLng
-     * @param float $lng
+     * @param string $lng
      * @return Geo
      */
-    public function setLng(float $lng): self
+    public function setLng(string $lng): self
     {
         $this->lng = $lng;
 
