@@ -11,12 +11,22 @@ use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use OpenApi\Annotations as OA;
+use Nelmio\ApiDocBundle\Annotation\Model;
 
 class BlogController extends AbstractFOSRestController
 {
     /**
+     * List all Blog Posts.
      * @Rest\Get("/list", name="blog_list")
+     * @OA\Response(
+     *      response=200,
+     *      description="List all Blog Posts.",
+     *      @Model(type=PostDto::class)
+     * )
      */
     public function list(RequestDataInterface $requestData)
     {
@@ -28,11 +38,23 @@ class BlogController extends AbstractFOSRestController
     }
 
     /**
+     * Get a single Blog Post
      * @Rest\Get("/item/{id}", name="fetch_item")
+     * @OA\Response(
+     *      response=200,
+     *      description="Get a single Blog Post",
+     *      @Model(type=PostDto::class)
+     * )
+     * @throws BadRequestHttpException
      */
     public function fetchItem(int $id, RequestDataInterface $requestData)
     {
-        $post = $requestData->fetchPost($id);
+        try {
+            $post = $requestData->fetchPost($id);
+        } catch (\Exception $e) {
+            return View::create($e->getMessage(), Response::HTTP_BAD_REQUEST);
+        }
+
         $view = View::create();
         $view->setData($post);
 
@@ -40,12 +62,22 @@ class BlogController extends AbstractFOSRestController
     }
 
     /**
+     * Get a single user.
      * @Rest\Get("/user/{id}", name="get_user")
+     * @OA\Response(
+     *      response=200,
+     *      description="Get a single user.",
+     *      @Model(type=User::class)
+     * )
      */
     public function fetchUser(int $id, RequestDataInterface $requestData, Request $request)
     {
-        //$id = $request->get('id');
-        $user = $requestData->fetchUser($id);
+        try {
+            $user = $requestData->fetchUser($id);
+        } catch (\Exception $e) {
+            return View::create($e->getMessage(), Response::HTTP_BAD_REQUEST);
+        }
+        
         $view = View::create();
         $view->setData($user);
 
@@ -53,7 +85,9 @@ class BlogController extends AbstractFOSRestController
     }
 
     /**
+     * Post a new blog Post item.
      * @Rest\Post("/item", name="post_item")
+     * @OA\RequestBody(@Model(type=PostFormType::class))
      */
     public function postItem(
         RequestDataInterface $requestData,

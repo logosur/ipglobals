@@ -21,6 +21,10 @@ class PostFormType extends AbstractType
                     new Assert\Length([
                         'min' => 5,
                     ])],
+                'documentation' => [
+                    'type' => 'string', // would have been automatically detected in this case
+                    'description' => 'Title',
+                ],
             ])
             ->add('body', TextareaType::class, [
                 'required' => true,
@@ -28,6 +32,10 @@ class PostFormType extends AbstractType
                     new Assert\Length([
                         'min' => 3,
                     ])],
+                'documentation' => [
+                    'type' => 'string', // would have been automatically detected in this case
+                    'description' => 'Body',
+                ],
             ])
             ->add('Send', SubmitType::class, [
                 'label' => 'Send',

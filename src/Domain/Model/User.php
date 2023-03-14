@@ -66,8 +66,8 @@ class User
         $this->email = $data['email'];
         $this->phone = $data['phone'];
         $this->website = $data['website'];
-        $this->address = (new Address())->fromArray($data['address']);
-        $this->company = (new Company())->fromArray($data['company']);
+        $this->address = (new Address())->fromArray((array) $data['address']);
+        $this->company = (new Company())->fromArray((array) $data['company']);
 
         return $this;
     }

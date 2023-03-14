@@ -13,12 +13,26 @@ class Post
 
     /**
      * @Assert\Type(type={"string"})
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *      min = 5,
+     *      max = 100,
+     *      minMessage = "FIELD_LENGTH_TOO_SHORT",
+     *      maxMessage = "FIELD_LENGTH_TOO_LONG"
+     * )
      * @var string
      */
     private string $title;
 
     /**
      * @Assert\Type(type={"string"})
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *      min = 3,
+     *      max = 2000,
+     *      minMessage = "FIELD_LENGTH_TOO_SHORT",
+     *      maxMessage = "FIELD_LENGTH_TOO_LONG"
+     * )
      * @var string
      */
     private string $body;

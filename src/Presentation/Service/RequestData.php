@@ -17,7 +17,6 @@ class RequestData implements RequestDataInterface
      */
     private MockDataInterface $mockData;
 
-
     public function __construct(MockDataInterface $MockData)
     {
         $this->mockData = $MockData;
@@ -33,15 +32,18 @@ class RequestData implements RequestDataInterface
         $posts = $this->mockData->getPosts();
 
         foreach ($posts as $id => $post) {
-            // Cache users to avoid redundant requests.
-            if (! isset($users[$post['userId']])) {
-                $user = $this->mockData->getUser($post['userId']);
-                $users[$post['userId']] = (new User())->fromArray($user);
-            }
+            $post = (array) $post;
+            $userId = $post['userId'];
 
+            // Cache users to avoid redundant requests.
+            if (!isset($users[$userId])) {
+                $user = (array) $this->mockData->getUser($userId);
+                $users[$userId] = (new User())->fromArray($user);
+            }
+            
             $postsDto[] = new PostDto(
                 (new Post())->fromArray($post),
-                $users[$post['userId']]
+                $users[$userId]
             );
         }
 

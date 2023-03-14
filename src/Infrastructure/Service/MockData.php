@@ -2,6 +2,7 @@
 
 namespace App\Infrastructure\Service;
 
+use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 /**
@@ -155,7 +156,7 @@ class MockData implements MockDataInterface
      */
     public function getUsers(): array
     {
-        return self::POSTS;
+        return self::USERS;
         //return $this->fetchPHApi(self::USER_URL);
     }
 
@@ -183,7 +184,7 @@ class MockData implements MockDataInterface
      */
     public function getUser(int $id): array
     {
-        if (! isset(self::USERS[$id])) {
+        if (!isset(self::USERS[$id])) {
             throw new \Exception('User not found.');
         }
 
@@ -208,6 +209,6 @@ class MockData implements MockDataInterface
             ]
         );
 
-        return (array) $response->getContent();
+        return (array)json_decode($response->getContent());
     }
 }
