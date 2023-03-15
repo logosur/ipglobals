@@ -38,7 +38,7 @@ $(document).ready(function () {
             data: $form.serialize(),
             success: function(response) {
                 if (response.code == 200) {
-                    alert(response.result);
+                    alert(response.message);
                 } else {
                     var errors_txt = getErrorsFromResponse(response);
                     alert(errors_txt);

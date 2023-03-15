@@ -111,7 +111,8 @@ class BlogController extends AbstractFOSRestController
                 $persisterMock->persist($post);
 
                 return View::create([
-                    'result' => 'Post sent!',
+                    'message' => 'Post sent!',
+                    'code' => Response::HTTP_OK,
                 ]);
             }
         } else {
