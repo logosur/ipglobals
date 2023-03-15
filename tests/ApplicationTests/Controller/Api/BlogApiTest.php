@@ -75,11 +75,10 @@ class BlogApiTest extends WebTestCase
                 ],
             ],
         );
-
+dump($client->getResponse()->getStatusCode());
         $this->assertNotEquals(Response::HTTP_OK, $client->getResponse()->getStatusCode());
     }
-
-    
+  
     public function testFailedPostBody(): void
     {
         $client = static::createClient();
@@ -90,6 +89,18 @@ class BlogApiTest extends WebTestCase
                     'title' => 'test title',
                     'body' => 'te',
                 ],
+            ],
+        );
+
+        $this->assertNotEquals(Response::HTTP_OK, $client->getResponse()->getStatusCode());
+    }
+
+    public function testEmptyPost(): void
+    {
+        $client = static::createClient();
+        $crawler = $client->request(
+            'POST',
+            '/api/item', [
             ],
         );
 
