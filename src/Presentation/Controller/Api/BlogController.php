@@ -105,7 +105,7 @@ class BlogController extends AbstractFOSRestController
 
         if ($form->isSubmitted()) {
             if (!$form->isValid()) {
-                return View::create($form);
+                return View::create($form, Response::HTTP_BAD_REQUEST);
             } else {
                 $post = $form->getData();
                 $persisterMock->persist($post);
@@ -117,7 +117,7 @@ class BlogController extends AbstractFOSRestController
         } else {
             $view = View::create();
             $view
-                ->setStatusCode(400)
+                ->setStatusCode(Response::HTTP_BAD_REQUEST)
                 ->setData([
                     'message' => 'Unexpected error.',
                     'errors' => [
