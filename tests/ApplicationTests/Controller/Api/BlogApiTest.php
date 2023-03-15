@@ -75,7 +75,7 @@ class BlogApiTest extends WebTestCase
                 ],
             ],
         );
-dump($client->getResponse()->getStatusCode());
+
         $this->assertNotEquals(Response::HTTP_OK, $client->getResponse()->getStatusCode());
     }
   
