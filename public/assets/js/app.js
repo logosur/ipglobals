@@ -29,21 +29,6 @@ $(document).ready(function () {
         });
     }
 
-    $('DISABLED[name="post_form"]').submit(function(e) {
-        var $form = $(e.currentTarget);
-
-        $.post($form.attr('action') + '?' + new Date().getTime(), $form.serialize(), function (data) {
-
-            if (data[1]?.errors[0]) {
-                alert("Error: " + data[1].errors[0]);
-            } else {
-                alert("Post sent successfully.");
-            }
-        });
-
-        return pevent(e);
-    });
-
     $('[name="post_form"]').submit(function(e) {
         var $form = $(e.currentTarget);
             
@@ -52,7 +37,12 @@ $(document).ready(function () {
             url: $form.attr('action') + '?' + new Date().getTime(),
             data: $form.serialize(),
             success: function(response) {
-                alert(response.result);
+                if (response.code == 200) {
+                    alert(response.result);
+                } else {
+                    var errors_txt = getErrorsFromResponse(response);
+                    alert(errors_txt);
+                }
             },
             error: function(response) {
                 var errors_txt = getErrorsFromResponse(response);
@@ -75,10 +65,11 @@ function buildPostItem(v) {
 }
 
 function getErrorsFromResponse(response) {
-    var error_txt = response.responseJSON.message + '\r\n';
+    var errorObj = response.responseJSON ?? response;
+    var error_txt = errorObj.message + '\r\n';
 
-    for (var item in response.responseJSON.errors.children) {
-        var err = response.responseJSON.errors.children[item];
+    for (var item in errorObj.errors.children) {
+        var err = errorObj.errors.children[item];
         if ($(err?.errors).length > 0) {
             error_txt += item + ': ' + err.errors[0] + '\r\n';
         }
